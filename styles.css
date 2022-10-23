@@ -1,6 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap');
 
 /* GLOBALS */
+
+/* colors 
+dark green: #0ABA9D
+medium green: #64E5A6
+light green: #98FDAC
+
+logo 
+bluest green: #00b59c
+light: #9cffac
+
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 * {
     margin: 0;
@@ -9,13 +26,38 @@
     box-sizing: border-box;
 }
 
+*:focus{outline:none !important}
+
+
 #container {
     font-size: 14pt;
     padding: 20px;
+    margin: 0 auto;
+    max-width: 80%;
 }
 
-H1 {
-    margin-bottom: 20px;
+/* title */
+
+#title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#logo {
+   height:75px;
+   padding-right: 20px;
+}
+
+#title-text {
+    font-size: 48pt;
+    font-weight: 200;
+}
+
+.highlight {
+    color: rgba(0, 181, 156, 1);
+    font-weight: 400;
 }
 
 /* BOOK LIST */
@@ -24,15 +66,18 @@ ul {
     list-style-type: none;
     width: 100%;
     display: block;
+    margin-top: 20px;
 }
 
 .card {
+    border-bottom: 1px #40ca8a5b solid;
     width: 100%;
+    padding: 10px;
     display: flex;
 }
 
 .card:hover{
-    background-color: lightgray;
+    font-weight: 600;
 }
 
 .card-info {
@@ -54,22 +99,97 @@ ul {
 /* BUTTONS AND MODAL */
 
 button {
-    padding: 5px 30px;
-    border-radius: 10px;
-    border: 1px lightgray solid;
+    border: 1px  rgba(0,181,156,1) solid;
+    padding: 10px 30px;
+    border-radius: 5px;
     cursor: pointer;
     margin: 10px 0px;
+    font-size: 11pt;
+    letter-spacing: 0.75px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgba(0,181,156,1);
+    background: none;
+    transition: all 0.1s ease-in-out;
 }
+
+button:hover {
+    background: rgba(0,181,156,0.2);
+}
+
+button:active {
+    background: rgba(0,181,156,0.5);
+}
+
 
 form {
     width: 500px;
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 35vh;
-    background-color: white;
-    padding: 40px 20px;
+    margin-top: 20vh;
+    background: rgb(156,255,172);
+    background: linear-gradient(58deg, rgba(0,181,156,1) 0%, rgba(156,255,172,1)  100%);
+    padding: 40px 20px 20px 20px;
+    color: white;
 }
+
+label, .read-label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 10pt;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+input {
+    width: 90%;
+    margin-bottom: 10px;
+    height: 35px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: 1px #ffffff solid;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 12pt;
+}
+
+
+
+.radios  {
+    display: flex;
+    align-items: center;
+
+}
+
+.radios > input {
+    width: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.radios > label {
+    cursor: pointer;
+    margin-right: 20px;
+    margin-bottom: 8px;
+}
+
+#add-book-btn {
+    background: rgba(255,255,255,0.4);
+    border: 1px white solid;
+    color: white;
+}
+
+#add-book-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+#add-book-btn:active {
+    background: rgba(255,255,255,0);
+}
+
 
 .modal {
     display: none;
@@ -80,18 +200,24 @@ form {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(255,255,255,0.5);
+
 }
 
 .close {
     float: right;
-    color:  gray;
+    margin-top: -40px;
+    font-size: 22pt;
+    color:  rgba(255,255,255,0.7);
 }
 
 .close:hover, .close:focus {
-    color: #000;
+    color: #fff;
     text-decoration: none;
     cursor: pointer;
 }
 
+#all-fields {
+    font-size: 10pt;
+    margin-top: 10px;
+}

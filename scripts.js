@@ -1,5 +1,6 @@
-// Define library array
+// Define library array and bookList
 let myLibrary = [];
+
 
 // Define the Book constructor
 function Book(title, author, pages, read) {
@@ -7,32 +8,31 @@ function Book(title, author, pages, read) {
     this.author = author
     this.pages = pages
     this.read = read
+    // return book info
     this.info = function() {
         return title + ' by ' + author + ', ' + pages + ' pages, ' + read;
     }
+    
 }
 
-// Display books
-function displayBooks() {
-    let bookList = document.getElementById('book-list');
-    bookList.innerHTML = '';
-    // for each book in the length of my library 
-    for (let i = 0; i < myLibrary.length; i++) {
-        // print that book
-        bookList.innerHTML += 
-        `<li class="card" data-index-number="` + i + `">
-            <span class="card-info">` + 
-                myLibrary[i].info() + 
-            `</span>
-            <span class="delete-book" >
-                <img 
-                    src="remove.png" 
-                    alt="Remove book" 
-                    class="delete-book-icon" 
-                    data-index-number="` + i + `" id="` + i + `">
-            </span>
-        </li>`;
-    } 
+function updateDisplay(newBook) {
+     // update the display
+     let bookList = document.getElementById('book-list');
+     // set newBook indexNumber property to equal the index
+     newBook.indexNumber = myLibrary.length - 1
+     bookList.innerHTML += 
+         `<li class="card" data-index-number="` + newBook.indexNumber + `">
+             <span class="card-info">` + 
+                 newBook.info() + 
+             `</span>
+             <span class="delete-book" >
+                 <img 
+                     src="remove.png" 
+                     alt="Remove book" 
+                     class="delete-book-icon" 
+                     data-index-number="` + newBook.indexNumber + `" id="` + newBook.indexNumber + `">
+             </span>
+         </li>`;
 }
 
 function addBook() {
@@ -40,25 +40,40 @@ function addBook() {
     let newTitle = document.getElementById('book-title').value;
     let newAuthor = document.getElementById('book-author').value;
     let newPages = document.getElementById('book-pages').value;
-    let readYet = document.getElementById('read-yet');
     // set read status depending on option selected
-    let readStatus;
-    if (readYet.value === 'read') {
-        readStatus = 'read';
-    } else if (readYet.value === 'not-read') {
-        readStatus = 'not read yet';
-    }
+    let readYet = displayRadioValue();
     // create a new Book object with this new book's properties
-    let newBook = new Book(newTitle, newAuthor, newPages, readStatus);
+    let newBook = new Book(newTitle, newAuthor, newPages, readYet);
     // add the new Book object to the myLibrary array
     myLibrary.push(newBook);
-    // update the display
-    displayBooks();
+   
+    // update display
+    updateDisplay(newBook);
+
+
+  
+    
 };
+
+function deleteBook(book) {
+     // get delete button
+    
+   
+ 
+}
+
+function displayRadioValue() {
+    let ele = document.getElementsByName('read-yet');
+    for (let i = 0; i < ele.length; i++) {
+        if(ele[i].checked) {
+            let readYet = ele[i].value;
+            return readYet;
+        }
+    }
+}
 
 
 // DOMContentLoaded
-
 document.addEventListener('DOMContentLoaded', (event) => {
 
     // get variables 
@@ -68,14 +83,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const addBookBtn = document.getElementById('add-book-btn');
     const form = document.getElementById('form');
 
+
     // prevent form submission refreshing page
     function handleForm(event) {
         event.preventDefault();
+        modal.style.display = "none";
     }
     form.addEventListener('submit', handleForm);
 
-    // print books to page
-    displayBooks();
 
     // Open modal when "New book" button clicked
     newBookBtn.addEventListener("click", function() {
@@ -93,6 +108,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Add new book to library when "Add book" button clicked
     addBookBtn.addEventListener("click", addBook);
 
- 
+   
 
 });
