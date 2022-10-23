@@ -1,9 +1,9 @@
 # Library App
-Live demo: TBA
+Live demo: https://jcrachael.github.io/library/
 
 Project sourced from The Odin Project JavaScript Course: https://www.theodinproject.com/lessons/node-path-javascript-library
 
-A simple library application using JavaScript and object-oriented programming.
+A simple library application using JavaScript and object-oriented programming. Users can click the "Add a Book" button to open a pop-up modal with a form for information about the book. Users can then add the book to their list, toggle the 'Read' status on or off for each book, and delete books from their library.
 
 
 ---------------------------------------------------------------------------------------------------
@@ -15,13 +15,3 @@ Last modified: 22 October 2022
 
 
 
-------------
-
-credits:
-
-Add and delete icons:
-<a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by Pixel perfect - Flaticon</a>
-
-
-Logo icon:
-<a href="https://www.flaticon.com/free-icons/business-and-finance" title="business and finance icons">Business and finance icons created by Freepik - Flaticon</a>

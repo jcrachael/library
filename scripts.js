@@ -45,40 +45,32 @@ class UI {
        if (book.read === 'read') {
         row.classList.add('read');
        }
-
+       
        if (row.classList.contains('read')) {
             row.innerHTML = `
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.pages}</td>
             <td>
-            
-            <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider round"></span>
-            </label>
-            
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
             </td> 
-            <td><a href="#" class="btn-delete delete">x</a></td>
-        `;
+            <td><a href="#" class="btn-delete delete">x</a></td>`;
        } else {
             row.innerHTML = `
                 <td>${book.title}</td>
                 <td>${book.author}</td>
                 <td>${book.pages}</td>
                 <td>
-                
-                <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-                </label>
-                
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
                 </td> 
-                <td><a href="#" class="btn-delete delete">x</a></td>
-            `;
+                <td><a href="#" class="btn-delete delete">x</a></td>`;
        }
-
-        
 
         // append row to our book-list
         list.appendChild(row);
@@ -105,10 +97,7 @@ class UI {
             // remove read class from parent element
             parentElement.classList.remove('read');
         }
-
-    
     }
-    
 
     // clear form fields
     static clearFields() {
@@ -130,6 +119,7 @@ function displayRadioValue() {
     }
 }
 
+// clear radio input
 function clearRadioValue() {
     let ele = document.getElementsByName('read-yet');
     for (let i = 0; i < ele.length; i++) {
@@ -143,35 +133,10 @@ function clearRadioValue() {
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 // Event: Add a book
-const form = document.getElementById('form');
-
-form.addEventListener('submit', (e) => {
-    // prevent default action
-    e.preventDefault();
-    modal.style.display = "none";
-    // get form values
-    const title = document.getElementById('book-title').value;
-    const author = document.getElementById('book-author').value;
-    const pages = document.getElementById('book-pages').value;
-    const read = displayRadioValue();
-   
-
-
-    // instantiate a book
-    const book = new Book(title, author, pages, read);
-
-    // add book to list
-    UI.addBookToList(book);
-
-    // Clear fields
-    UI.clearFields();
-});
-
-// Open modal when "New book" button clicked
+// First, open modal when "New book" button clicked
 const modal = document.getElementById('myModal');
 const newBookBtn = document.getElementById('new-book-btn');
 const span = document.getElementById('close-modal');
-
 newBookBtn.addEventListener("click", function() {
     modal.style.display = "block";
 });
@@ -184,12 +149,34 @@ window.addEventListener("click", function(event) {
     }
 });
 
+// Then, listen for form submission and on submit, create new book with the form
+// inputs, and add it to the book list, then clear the form fields
+const form = document.getElementById('form');
+form.addEventListener('submit', (e) => {
+    // prevent default action
+    e.preventDefault();
+    modal.style.display = "none";
+    // get form values
+    const title = document.getElementById('book-title').value;
+    const author = document.getElementById('book-author').value;
+    const pages = document.getElementById('book-pages').value;
+    const read = displayRadioValue();
+    // instantiate a book
+    const book = new Book(title, author, pages, read);
+    // add book to list
+    UI.addBookToList(book);
+    // Clear fields
+    UI.clearFields();
+});
+
+
 // Event: Delete a book
-// use event propagation to select a parent element and target a child inside
+// use event propagation to select a parent element of the child target 
 document.getElementById('book-list').addEventListener('click', (e) => {
     UI.deleteBook(e.target);
 })
 
+// Event: Toggle 'read' Class slider
 document.getElementById('book-list').addEventListener('click', (e) => {
     // toggle book class with slider
     UI.toggleBookClass(e.target);

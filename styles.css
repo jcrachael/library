@@ -1,11 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-/* GLOBALS */
 
-/* colors 
-bluest green: #00b59c
-light green: #9cffac
-*/
+/* GLOBALS */
 
 *,
 *::before,
@@ -17,17 +13,17 @@ light green: #9cffac
     margin: 0;
     padding: 0;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
 }
 
 *:focus{outline:none !important}
 
-
 #container {
+    position: relative;
     font-size: 14pt;
     padding: 20px;
     margin: 0 auto;
     max-width: 80%;
+    min-height: 100vh;
 }
 
 /* TITLE */
@@ -63,21 +59,9 @@ table {
     text-align: left;
 }
 
-th {
-
-}
-
 tr {
     height: 50px;
     border-bottom: 1px #40ca8a5b solid;
-}
-
-tr.read {
-    
-}
-
-td {
-
 }
 
 .btn-delete {
@@ -91,7 +75,6 @@ td {
 .btn-delete:hover {
     color: red;
 }
-
 
 /* BUTTONS, FORM AND MODAL */
 
@@ -117,7 +100,6 @@ button:hover, input[type="submit"]:hover {
 button:active, input[type="submit"]:active {
     background: rgba(0,181,156,0.5);
 }
-
 
 form {
     width: 500px;
@@ -153,8 +135,6 @@ input {
     font-size: 12pt;
 }
 
-
-
 .radios  {
     display: flex;
     align-items: center;
@@ -189,7 +169,6 @@ input {
     background: rgba(255,255,255,0);
 }
 
-
 .modal {
     display: none;
     position: fixed;
@@ -200,7 +179,6 @@ input {
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(255,255,255,0.5);
-
 }
 
 .close {
@@ -220,7 +198,6 @@ input {
     font-size: 10pt;
     margin-top: 10px;
 }
-
 
 /* sliders */
 .switch {
@@ -282,3 +259,25 @@ input {
   .slider.round:before {
     border-radius: 50%;
   }
+  
+/* FOOTER */
+footer {
+    position: absolute;
+    font-size: 9pt;
+    text-align: center;
+    max-height: 15px;
+    margin: 5px 0px;
+    bottom: 0;
+    color: #333;
+    opacity: 0.8;
+    width: 100%;
+}
+
+footer a {
+    text-decoration: underline;
+    color: #00b59c;
+}
+
+footer a:hover {
+    color: #9cffac;
+}
