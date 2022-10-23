@@ -16,16 +16,16 @@ class UI {
         // hard-coded array of stored books for pre-storage display
         const StoredBooks = [
             {
-                title: 'Book One',
-                author: 'John Doe',
-                pages: '275',
+                title: 'The Hobbit',
+                author: 'J.R.R. Tolkein',
+                pages: '310',
                 read: 'read'
             },
             {
-                title: 'Book Two',
-                author: 'Celery Smith',
-                pages: '369',
-                read: 'notread'
+                title: 'Before They Are Hanged',
+                author: 'Joe Abercrombie',
+                pages: '441',
+                read: 'not-read'
             }
         ];
 
@@ -40,13 +40,46 @@ class UI {
         const list = document.getElementById('book-list');
         // add a row
         const row = document.createElement('tr');
-        row.innerHTML = `
+
+        // if book has been read, append row with 'read' class
+       if (book.read === 'read') {
+        row.classList.add('read');
+       }
+
+       if (row.classList.contains('read')) {
+            row.innerHTML = `
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.pages}</td>
-            <td>${book.read}</td>
+            <td>
+            
+            <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+            </label>
+            
+            </td> 
             <td><a href="#" class="btn-delete delete">x</a></td>
         `;
+       } else {
+            row.innerHTML = `
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.pages}</td>
+                <td>
+                
+                <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+                </label>
+                
+                </td> 
+                <td><a href="#" class="btn-delete delete">x</a></td>
+            `;
+       }
+
+        
+
         // append row to our book-list
         list.appendChild(row);
     }
@@ -60,6 +93,22 @@ class UI {
         }
     }
 
+    // toggle book class
+    static toggleBookClass(el) {
+        // define table row parent element
+        let parentElement = el.parentElement.parentElement.parentElement;
+
+        if (el.checked) {
+            parentElement.classList.add('read');
+            // add read class to parent element
+        } else {
+            // remove read class from parent element
+            parentElement.classList.remove('read');
+        }
+
+    
+    }
+    
 
     // clear form fields
     static clearFields() {
@@ -76,7 +125,7 @@ function displayRadioValue() {
     for (let i = 0; i < ele.length; i++) {
         if(ele[i].checked) {
             let read = ele[i].value;
-            return read;
+            return read
         }
     }
 }
@@ -105,6 +154,8 @@ form.addEventListener('submit', (e) => {
     const author = document.getElementById('book-author').value;
     const pages = document.getElementById('book-pages').value;
     const read = displayRadioValue();
+   
+
 
     // instantiate a book
     const book = new Book(title, author, pages, read);
@@ -139,6 +190,10 @@ document.getElementById('book-list').addEventListener('click', (e) => {
     UI.deleteBook(e.target);
 })
 
+document.getElementById('book-list').addEventListener('click', (e) => {
+    // toggle book class with slider
+    UI.toggleBookClass(e.target);
+})
 
 
 
