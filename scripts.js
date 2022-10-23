@@ -1,113 +1,149 @@
-// Define library array and bookList
-let myLibrary = [];
-
-
-// Define the Book constructor
-function Book(title, author, pages, read) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-    // return book info
-    this.info = function() {
-        return title + ' by ' + author + ', ' + pages + ' pages, ' + read;
+// Book class: represents a book
+class Book {
+    // set constructor
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-    
 }
 
-function updateDisplay(newBook) {
-     // update the display
-     let bookList = document.getElementById('book-list');
-     // set newBook indexNumber property to equal the index
-     newBook.indexNumber = myLibrary.length - 1
-     bookList.innerHTML += 
-         `<li class="card" data-index-number="` + newBook.indexNumber + `">
-             <span class="card-info">` + 
-                 newBook.info() + 
-             `</span>
-             <span class="delete-book" >
-                 <img 
-                     src="remove.png" 
-                     alt="Remove book" 
-                     class="delete-book-icon" 
-                     data-index-number="` + newBook.indexNumber + `" id="` + newBook.indexNumber + `">
-             </span>
-         </li>`;
+// UI class: handle UI tasks
+class UI {
+    // define static method
+    static displayBooks() {
+        // hard-coded array of stored books for pre-storage display
+        const StoredBooks = [
+            {
+                title: 'Book One',
+                author: 'John Doe',
+                pages: '275',
+                read: 'read'
+            },
+            {
+                title: 'Book Two',
+                author: 'Celery Smith',
+                pages: '369',
+                read: 'notread'
+            }
+        ];
+
+        const books = StoredBooks;
+
+        // loop through all the books in the array, then call addBookToList method
+        books.forEach((book) => UI.addBookToList(book));
+    }
+
+    static addBookToList(book) {
+        // get book-list 
+        const list = document.getElementById('book-list');
+        // add a row
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.pages}</td>
+            <td>${book.read}</td>
+            <td><a href="#" class="btn-delete delete">x</a></td>
+        `;
+        // append row to our book-list
+        list.appendChild(row);
+    }
+
+    // delete book
+    static deleteBook(el) {
+        // if the element clicked on contains the class 'delete'
+        if (el.classList.contains('delete')) {
+            // delete parent row
+            el.parentElement.parentElement.remove();
+        }
+    }
+
+
+    // clear form fields
+    static clearFields() {
+        document.getElementById('book-title').value = '';
+        document.getElementById('book-author').value = '';
+        document.getElementById('book-pages').value = '';
+        clearRadioValue();
+    }
 }
 
-function addBook() {
-    // set variables for book properties
-    let newTitle = document.getElementById('book-title').value;
-    let newAuthor = document.getElementById('book-author').value;
-    let newPages = document.getElementById('book-pages').value;
-    // set read status depending on option selected
-    let readYet = displayRadioValue();
-    // create a new Book object with this new book's properties
-    let newBook = new Book(newTitle, newAuthor, newPages, readYet);
-    // add the new Book object to the myLibrary array
-    myLibrary.push(newBook);
-   
-    // update display
-    updateDisplay(newBook);
-
-
-  
-    
-};
-
-function deleteBook(book) {
-     // get delete button
-    
-   
- 
-}
-
+// check radio input
 function displayRadioValue() {
     let ele = document.getElementsByName('read-yet');
     for (let i = 0; i < ele.length; i++) {
         if(ele[i].checked) {
-            let readYet = ele[i].value;
-            return readYet;
+            let read = ele[i].value;
+            return read;
         }
     }
 }
 
+function clearRadioValue() {
+    let ele = document.getElementsByName('read-yet');
+    for (let i = 0; i < ele.length; i++) {
+        ele[i].checked = false;
+    }
+}
 
-// DOMContentLoaded
-document.addEventListener('DOMContentLoaded', (event) => {
+// Store class: handles storage >>> for later
 
-    // get variables 
-    const modal = document.getElementById('myModal');
-    const newBookBtn = document.getElementById('new-book-btn');
-    const span = document.getElementById('close-modal');
-    const addBookBtn = document.getElementById('add-book-btn');
-    const form = document.getElementById('form');
+// Event: Display Books as soon as DOM loaded
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
+// Event: Add a book
+const form = document.getElementById('form');
 
-    // prevent form submission refreshing page
-    function handleForm(event) {
-        event.preventDefault();
+form.addEventListener('submit', (e) => {
+    // prevent default action
+    e.preventDefault();
+    modal.style.display = "none";
+    // get form values
+    const title = document.getElementById('book-title').value;
+    const author = document.getElementById('book-author').value;
+    const pages = document.getElementById('book-pages').value;
+    const read = displayRadioValue();
+
+    // instantiate a book
+    const book = new Book(title, author, pages, read);
+
+    // add book to list
+    UI.addBookToList(book);
+
+    // Clear fields
+    UI.clearFields();
+});
+
+// Open modal when "New book" button clicked
+const modal = document.getElementById('myModal');
+const newBookBtn = document.getElementById('new-book-btn');
+const span = document.getElementById('close-modal');
+
+newBookBtn.addEventListener("click", function() {
+    modal.style.display = "block";
+});
+span.addEventListener("click", function() {
+    modal.style.display = "none";
+});
+window.addEventListener("click", function(event) {
+    if (event.target === modal) {
         modal.style.display = "none";
     }
-    form.addEventListener('submit', handleForm);
-
-
-    // Open modal when "New book" button clicked
-    newBookBtn.addEventListener("click", function() {
-        modal.style.display = "block";
-    });
-    span.addEventListener("click", function() {
-        modal.style.display = "none";
-    });
-    window.addEventListener("click", function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-
-    // Add new book to library when "Add book" button clicked
-    addBookBtn.addEventListener("click", addBook);
-
-   
-
 });
+
+// Event: Delete a book
+// use event propagation to select a parent element and target a child inside
+document.getElementById('book-list').addEventListener('click', (e) => {
+    UI.deleteBook(e.target);
+})
+
+
+
+
+
+
+
+
+

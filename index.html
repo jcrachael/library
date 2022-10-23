@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js"></script>
-
-    <title>Library App</title>
+    <script src="https://kit.fontawesome.com/f9ddb3ef15.js" crossorigin="anonymous"></script>
+    
+    <title>MyReadingCorner App</title>
 </head>
 <body>
     <div id="container">
@@ -18,15 +18,27 @@
         </div>
         <button id="new-book-btn">Add a book</button>
         <div id="book-container">
+
+            <table>
+                <thead>
+                    <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Pages</th>
+                    <th>Read</th>
+                    </tr>
+                    <th></th>
+                </thead>
+                <tbody id="book-list"></tbody>
+            </table>
             
-            <ul id="book-list">
+            
 
                 <!-- Sample book element -->
 
 
 
 
-            </ul>
         </div>
         
 
@@ -54,8 +66,8 @@
                     <label for="not-read">Not read</label>   
                 </span>
                            
-                
-                <button id="add-book-btn">Add to library</button>
+                <input type="submit" value="Add to library" id="add-book-btn">
+              
                 <p id="all-fields">All fields are required.</p>
             </form>
         </div>
@@ -64,5 +76,6 @@
         </footer>
 
     </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
