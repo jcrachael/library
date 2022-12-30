@@ -1,17 +1,16 @@
-# Library App
-[View live demo](https://jcrachael.github.io/library/)
+# MyReadingCorner
 
-Project sourced from [The Odin Project JavaScript Course](https://www.theodinproject.com/lessons/node-path-javascript-library).
+Live demo coming soon.
 
-A simple library application using JavaScript and object-oriented programming. Users can click the "Add a Book" button to open a pop-up modal with a form for information about the book. Users can then add the book to their list, toggle the 'Read' status on or off for each book, and delete books from their library.
+Project sourced from The Odin Project JavaScript Course [JavaScript Library](https://www.theodinproject.com/lessons/node-path-javascript-library) and [Backend-as-a-Service](https://www.theodinproject.com/lessons/javascript-using-baas-for-your-back-end) lessons.
 
-## To-do:
-* Implement local storage
+A simple library application created with JavaScript and Google Firebase. 
+
 
 
 ---
 
-Last modified: 26 October 2022
+Last modified: 30 December 2022
 
 
 

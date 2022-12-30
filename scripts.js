@@ -1,3 +1,25 @@
+import {initializeApp} from 'firebase/app';
+import {getAnalytics} from 'firebase/analytics';
+
+// This  app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyD-czTKXZkE3IFQONh5J12PA4ABsUp0M9Q",
+    authDomain: "myreadingcorner-7ccc3.firebaseapp.com",
+    projectId: "myreadingcorner-7ccc3",
+    storageBucket: "myreadingcorner-7ccc3.appspot.com",
+    messagingSenderId: "824466939869",
+    appId: "1:824466939869:web:b3e13475be105fa470e034",
+    measurementId: "G-Q19SGR36X6"
+  };
+
+// Initialise Firebase 
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+
+
+
 // Book class: represents a book
 class Book {
     // set constructor
