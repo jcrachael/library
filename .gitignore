@@ -1,1 +1,12 @@
 /node_modules
+/.prettierrc.json
+/firebase-debug.log
+/.vscode
+/dist
+/src/firebase-config.js
+/package-lock.json
+/firebase.json
+/package.json
+/webpack.config.js
+/.firebaserc
+/server.js
